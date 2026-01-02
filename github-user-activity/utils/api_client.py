@@ -4,11 +4,6 @@ import urllib.request
 
 
 def fetch_api_data(url):
-    """
-    Fetches data from an API using the standard library
-    and returns a Python dictionary/list.
-    """
-
     try:
         with urllib.request.urlopen(url) as response:
             if response.getcode() == 200:
