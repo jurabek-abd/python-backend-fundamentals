@@ -24,7 +24,7 @@ A simple command-line interface (CLI) application to track and manage your tasks
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
 cd task-tracker
 ```
 
