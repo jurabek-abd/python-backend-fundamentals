@@ -127,9 +127,10 @@ This project helps practice:
 
 ## Roadmap / To-Do
 
-- [ ] Add more event types (WatchEvent, ForkEvent, CreateEvent, etc.)
-- [ ] Implement caching to reduce API calls
-- [ ] Handle GitHub API rate limiting more gracefully
+- [✅] Add more event types (WatchEvent, ForkEvent, CreateEvent, etc.)
+- [✅] Implement caching to reduce API calls
+- [✅] Handle GitHub API rate limiting more gracefully
+- [ ] Improve Code Quality
 
 ## GitHub API Information
 
