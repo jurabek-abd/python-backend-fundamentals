@@ -1,8 +1,10 @@
 import json
 import os
 
+FILENAME = "storage.json"
 
-def load_tasks(filename="storage.json"):
+
+def load_tasks(filename=FILENAME):
     if not os.path.exists(filename):
         save_tasks([])
 
@@ -19,7 +21,7 @@ def load_tasks(filename="storage.json"):
         return []
 
 
-def save_tasks(tasks=None, filename="storage.json"):
+def save_tasks(tasks=None, filename=FILENAME):
     if tasks is None:
         tasks = []
 
