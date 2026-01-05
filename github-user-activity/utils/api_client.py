@@ -15,9 +15,15 @@ def fetch_api_data(url, retries=5, delay=1):
                 print(f"Error: Received status code {response.getcode()}")
                 return None
     except urllib.error.HTTPError as e:
-        if e.code == 429 and retries > 0:
+        if 500 <= e.code <= 599 and retries > 0:
             time.sleep(delay)
             return fetch_api_data(url, retries - 1, delay * 2)
+        elif e.code == 429 and retries > 0:
+            time.sleep(delay)
+            return fetch_api_data(url, retries - 1, delay * 2)
+        elif 400 <= e.code <= 499:
+            print(f"( Code: {e.code} ) Error connecting to the API: {e.reason}")
+            return None
         raise
     except urllib.error.URLError as e:
         print(f"Error connecting to the API: {e.reason}")

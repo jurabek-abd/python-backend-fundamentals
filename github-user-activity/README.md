@@ -1,156 +1,160 @@
 # GitHub User Activity CLI
 
-A command-line interface tool to fetch and display recent GitHub activity for any user. Built with Python using only standard library modules.
+A simple command-line interface (CLI) application to fetch and display GitHub user activity. Built with Python using only standard library modules.
 
-> **Status**: 🚧 Work in Progress
-
-This project is part of the [roadmap.sh Backend Projects](https://roadmap.sh/projects/github-user-activity) series.
+**Project URL:** https://roadmap.sh/projects/github-user-activity
 
 ## Features
 
-- Fetch recent GitHub activity using the GitHub API
-- Display activity in a clean, readable format
-- Filter events by type (Push, Issue Comments, Pull Requests)
-- Built using only Python standard library (no external dependencies)
+- ✅ Fetch recent GitHub activity using the GitHub API
+- ✅ Display activity in a clean, readable format
+- ✅ Filter events by type (Push, PR, Issues, etc.)
+- ✅ Smart caching with expiry to reduce API calls
+- ✅ Input validation for GitHub usernames
+- ✅ Automatic retry with exponential backoff for rate limits
+- ✅ Error handling for network issues and API failures
 
 ## Requirements
 
 - Python 3.6 or higher
-- Internet connection (to access GitHub API)
+- No external dependencies (uses only Python standard library)
 
 ## Installation
 
-1. Clone this repository:
+1. Clone the repository:
 ```bash
-git clone <your-repo-url>
-cd github-user-activity
+git clone https://github.com/yourusername/github-activity-cli.git
+cd github-activity-cli
 ```
 
-2. No additional dependencies needed! This project uses only Python's standard library.
-
-## Usage
-
-### Basic Usage
-
-Fetch and display all recent activity for a GitHub user:
-
-```bash
-python main.py <username>
-```
-
-**Example:**
-```bash
-python main.py yyx990803
-```
-
-**Output:**
-```
-Output:
-
-- Pushed to rebrand in vitejs/vite
-- Commented on issue #9345 in vitest-dev/vitest
-- Opened pull request #736 in oxc-project/oxc-project.github.io
-- Pushed to main in rolldown/rolldown
-```
-
-### Filter by Event Type
-
-Filter activity to show only specific event types:
-
-```bash
-python main.py <username> --type <event_type>
-```
-
-**Available event types:**
-- `PushEvent` - Code pushes
-- `IssueCommentEvent` - Comments on issues or pull requests
-- `PullRequestEvent` - Pull request actions (opened, closed, merged)
-
-**Examples:**
-```bash
-# Show only push events
-python main.py yyx990803 --type PushEvent
-
-# Show only pull request events
-python main.py yyx990803 --type PullRequestEvent
-
-# Show only issue comments
-python main.py yyx990803 --type IssueCommentEvent
-```
+2. The project is ready to use! No additional installation required.
 
 ## Project Structure
 
 ```
-github-user-activity/
-│
-├── main.py                  # Entry point and CLI argument handling
+github-activity-cli/
 ├── utils/
-│   ├── api_client.py       # GitHub API interaction
-│   └── formatter.py        # Event formatting and display
-└── README.md               # Project documentation
+│   ├── __init__.py
+│   ├── api_client.py          # GitHub API interaction
+│   ├── cache_handling.py      # File-based caching
+│   └── formatter.py           # Event formatting
+├── main.py                     # Entry point
+├── cache.json                  # Cache storage (auto-created)
+├── .gitignore
+└── README.md
 ```
 
-## How It Works
+## Usage
 
-1. **API Client** (`api_client.py`): 
-   - Makes HTTP requests to GitHub's public API
-   - Handles network errors gracefully
-   - Returns parsed JSON data
+Run the application using Python with the following commands:
 
-2. **Formatter** (`formatter.py`):
-   - Processes event data
-   - Formats different event types appropriately
-   - Displays clean, readable output
+### Fetch User Activity
 
-3. **Main** (`main.py`):
-   - Parses command-line arguments
-   - Coordinates API calls and formatting
-   - Handles event filtering
+```bash
+python main.py <username>
+# Output:
+# - Pushed to main in octocat/Hello-World
+# - Opened pull request #123 in octocat/Spoon-Knife
+# - Starred octocat/git-consortium
+```
+
+### Filter by Event Type
+
+```bash
+# Show only push events
+python main.py octocat --type=PushEvent
+
+# Show only pull requests
+python main.py octocat --type=PullRequestEvent
+
+# Show only stars
+python main.py octocat --type=WatchEvent
+```
+
+## Available Event Types
+
+| Event Type | Description |
+|------------|-------------|
+| `PushEvent` | Code pushes to repositories |
+| `PullRequestEvent` | Pull request actions (opened, closed, merged) |
+| `IssuesEvent` | Issue actions (opened, closed, reopened) |
+| `IssueCommentEvent` | Comments on issues or pull requests |
+| `WatchEvent` | Repository stars |
+| `ForkEvent` | Repository forks |
+| `CreateEvent` | Branch or tag creation |
+| `DeleteEvent` | Branch or tag deletion |
+
+## Example Workflow
+
+```bash
+# Fetch all activity
+python main.py octocat
+
+# Filter by push events
+python main.py octocat --type=PushEvent
+
+# Filter by pull requests
+python main.py octocat --type=PullRequestEvent
+
+# Filter by stars
+python main.py octocat --type=WatchEvent
+```
 
 ## Error Handling
 
-The application handles common errors:
-- **Invalid username**: Displays appropriate error message
-- **Network failures**: Catches and reports connection errors
-- **API rate limits**: Shows HTTP status code errors
-- **Invalid event types**: Argument parser prevents invalid filter types
+The application handles various error scenarios gracefully:
 
-## Learning Objectives
+- **Invalid usernames**: Validates format before making API requests
+- **User not found (404)**: Displays clear error message
+- **Rate limits (429)**: Automatically retries with exponential backoff
+- **Network issues**: Shows connection error message
+- **Server errors (500+)**: Automatically retries failed requests
 
-This project helps practice:
-- Working with REST APIs
-- Handling JSON data in Python
-- Building command-line interfaces with `argparse`
-- Error handling and defensive programming
-- Code organization and modularity
-- Using Python's standard library (`urllib`, `json`, `argparse`)
+## Caching
 
-## Roadmap / To-Do
+Activity data is cached in `cache.json` to reduce API calls. The cache expires after 10 seconds (configurable in `main.py`).
 
-- [✅] Add more event types (WatchEvent, ForkEvent, CreateEvent, etc.)
-- [✅] Implement caching to reduce API calls
-- [✅] Handle GitHub API rate limiting more gracefully
-- [ ] Improve Code Quality
+```bash
+# First request - fetches from GitHub API
+python main.py octocat
 
-## GitHub API Information
+# Second request within 10 seconds - loads from cache
+python main.py octocat
+# Output: "Loading from cache.json..."
+```
 
-This project uses the GitHub Events API:
-- **Endpoint**: `https://api.github.com/users/<username>/events`
-- **Documentation**: [GitHub Events API](https://docs.github.com/en/rest/activity/events)
-- **Rate Limit**: 60 requests per hour for unauthenticated requests
+## Data Storage
 
-## Limitations
+Cache is stored in `cache.json` in the project directory. The file is automatically created on first use.
 
-- Currently displays only the most recent events (GitHub API returns up to 30 events)
-- No authentication implemented (subject to lower rate limits)
-- Only three event types are formatted (more can be added)
+Example `cache.json` structure:
+```json
+{
+    "octocat": {
+        "events": [...],
+        "updated_at": "2024-01-05T10:30:00.000000"
+    }
+}
+```
+
+## Development
+
+### Code Organization
+
+- **api_client.py**: Handles GitHub API requests with retry logic
+- **cache_handling.py**: Manages JSON cache file operations
+- **formatter.py**: Formats different event types for display
+- **main.py**: Orchestrates CLI arguments and application flow
+
+### Configuration
+
+Key constants in `main.py`:
+- `CACHE_EXPIRY_SECONDS = 10` - Cache duration in seconds
+- `MAX_GITHUB_USERNAME_LENGTH = 39` - GitHub's username limit
 
 ## Contributing
 
-This is a learning project, but suggestions and improvements are welcome! Feel free to:
-- Open an issue for bugs or feature requests
-- Submit a pull request with improvements
-- Share feedback on code structure and practices
+This is a learning project built as part of the roadmap.sh backend project series. Suggestions and improvements are welcome!
 
 ## License
 
@@ -158,9 +162,8 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-- Project idea from [roadmap.sh](https://roadmap.sh/projects/github-user-activity)
-- GitHub API documentation and community
+Built as part of the [roadmap.sh GitHub User Activity project](https://roadmap.sh/projects/github-user-activity).
 
 ---
 
-**Project Status**: This is a work-in-progress learning project. Features and functionality are being actively developed.
+**Project URL:** https://roadmap.sh/projects/github-user-activity

@@ -2,12 +2,14 @@ import argparse
 import re
 import sys
 from datetime import datetime
+from urllib.parse import quote
 
 from utils.api_client import fetch_api_data
 from utils.cache_handling import load_cache, save_cache
 from utils.formatter import format_activity
 
 CACHE_EXPIRY_SECONDS = 10
+MAX_GITHUB_USERNAME_LENGTH = 39
 
 
 def create_parser():
@@ -33,7 +35,9 @@ def create_parser():
     return parser
 
 
-def is_valid_github_username(username):
+def is_valid_github_username(
+    username, max_github_username_length=MAX_GITHUB_USERNAME_LENGTH
+):
     pattern = r"^[A-Za-z0-9-]*$"
 
     if not username:
@@ -42,11 +46,7 @@ def is_valid_github_username(username):
     if username.startswith("-") or username.endswith("-"):
         return False
 
-    regex_match = re.match(pattern, username)
-
-    length_ok = len(username) < 40
-
-    if regex_match and length_ok:
+    if re.match(pattern, username) and len(username) <= max_github_username_length:
         return True
 
     return False
@@ -88,16 +88,15 @@ def main():
         output_activity(cache[args.username]["events"], args.type)
         return
 
-    url = f"https://api.github.com/users/{args.username}/events"
+    url = f"https://api.github.com/users/{quote(args.username)}/events"
 
     events = fetch_api_data(url)
 
     if events is None:
+        print("Failed to fetch GitHub activity. See error above.")
         sys.exit(1)
 
-    cache[args.username] = {}
-    cache[args.username]["events"] = events
-    cache[args.username]["updated_at"] = datetime.now().isoformat()
+    cache[args.username] = {"events": events, "updated_at": datetime.now().isoformat()}
     save_cache(cache)
     output_activity(events, args.type)
 

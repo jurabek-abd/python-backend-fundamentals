@@ -66,6 +66,7 @@ That’s intentional.
 ## Projects completed
 
 - [Task Tracker](https://roadmap.sh/projects/task-tracker/solutions?u=692db4d2a17ff74763dc81f1)
+- [GitHub User Activity](https://roadmap.sh/projects/github-user-activity)
 
 ---
 
