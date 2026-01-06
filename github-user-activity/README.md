@@ -2,7 +2,7 @@
 
 A simple command-line interface (CLI) application to fetch and display GitHub user activity. Built with Python using only standard library modules.
 
-**Project URL:** https://roadmap.sh/projects/github-user-activity
+**Project URL:** https://roadmap.sh/projects/github-user-activity/solutions?u=692db4d2a17ff74763dc81f1
 
 ## Features
 
@@ -23,7 +23,7 @@ A simple command-line interface (CLI) application to fetch and display GitHub us
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/github-activity-cli.git
+git clone https://github.com/jurabek-abd/github-activity-cli.git
 cd github-activity-cli
 ```
 
@@ -162,8 +162,8 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-Built as part of the [roadmap.sh GitHub User Activity project](https://roadmap.sh/projects/github-user-activity).
+Built as part of the [roadmap.sh GitHub User Activity project](https://roadmap.sh/projects/github-user-activity/solutions?u=692db4d2a17ff74763dc81f1).
 
 ---
 
-**Project URL:** https://roadmap.sh/projects/github-user-activity
+**Project URL:** https://roadmap.sh/projects/github-user-activity/solutions?u=692db4d2a17ff74763dc81f1
