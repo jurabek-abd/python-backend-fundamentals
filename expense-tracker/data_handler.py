@@ -3,10 +3,11 @@ import os
 
 FILENAME = "expenses.json"
 
+
 def load_expenses(filename=FILENAME):
     if not os.path.exists(filename):
         save_expenses([])
-    
+
     try:
         with open(filename, "r") as f:
             return json.load(f)
@@ -18,6 +19,7 @@ def load_expenses(filename=FILENAME):
     except Exception as e:
         print(f"Error reading {filename}: {e}. Starting with empty expense list.")
         return []
+
 
 def save_expenses(expenses=None, filename=FILENAME):
     if expenses is None:
