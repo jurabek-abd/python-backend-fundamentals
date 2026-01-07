@@ -5,10 +5,39 @@ from expense_manager import (
     add_expense,
     delete_expense,
     list_expenses,
-    print_expenses,
     summary_expenses,
     update_expense,
 )
+
+
+def print_expenses(expenses):
+    if not expenses:
+        print("# Expenses not listed. No expenses found")
+        return
+
+    headers = ["ID", "Date", "Description", "Category", "Amount"]
+
+    rows = [
+        [str(e["id"]), e["date"], e["description"], e["category"], f"${e['amount']}"]
+        for e in expenses
+    ]
+
+    # Calculate column widths
+    col_widths = [
+        max(len(header), max(len(row[i]) for row in rows))
+        for i, header in enumerate(headers)
+    ]
+
+    # Print header
+    header_line = "  ".join(
+        header.ljust(col_widths[i]) for i, header in enumerate(headers)
+    )
+    print(header_line)
+    print("-" * len(header_line))
+
+    # Print rows
+    for row in rows:
+        print("  ".join(row[i].ljust(col_widths[i]) for i in range(len(row))))
 
 
 def handle_add_expense(args):
