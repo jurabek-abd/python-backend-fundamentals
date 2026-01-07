@@ -1,9 +1,11 @@
 import argparse
 
+from data_handler import export_expenses
 from expense_manager import (
     add_expense,
     delete_expense,
     list_expenses,
+    print_expenses,
     summary_expenses,
     update_expense,
 )
@@ -15,7 +17,57 @@ def handle_add_expense(args):
     if result["success"]:
         print(f"# Expense added successfully (ID: {result['id']})")
     else:
-        print(f"# Expense was not added. {result['error']}")
+        print(f"# Expense not added. {result['error']}")
+
+
+def handle_delete_expense(args):
+    result = delete_expense(args)
+
+    if result["success"]:
+        print(f"# Expense deleted successfully (ID: {args.id})")
+    else:
+        print(f"# Expense not deleted. {result['error']}")
+
+
+def handle_list_expenses(args):
+    result = list_expenses(args)
+
+    if result["success"]:
+        print_expenses(result["expenses"])
+    else:
+        print(f"# Expenses not listed. {result['error']}")
+
+
+def handle_summary_expenses(args):
+    result = summary_expenses(args)
+
+    if not result["success"]:
+        print(f"# Expenses not summarized. {result['error']}")
+        return
+
+    if args.year is not None and args.month is not None:
+        print(
+            f"# Total expenses for {args.category or 'all'} in {args.month}/{args.year}: ${result['total']}"
+        )
+    elif args.month is not None:
+        # only month
+        print(f"# Total expenses for month {args.month}: ${result['total']}")
+    elif args.year is not None:
+        # only year
+        print(f"# Total expenses for year {args.year}: ${result['total']}")
+    elif args.category:
+        print(f"# Total expenses for {args.category}: ${result['total']}")
+    else:
+        print(f"# Total expenses: ${result['total']}")
+
+
+def handle_update_expense(args):
+    result = update_expense(args)
+
+    if result["success"]:
+        print(f"# Expense updated successfully (ID: {args.id})")
+    else:
+        print(f"# Expense not updated. {result['error']}")
 
 
 def create_parsers():
@@ -47,6 +99,10 @@ def create_parsers():
     summary_parser = subparsers.add_parser("summary", help="Show expense summary")
     summary_parser.add_argument("--category")
     summary_parser.add_argument("--month", type=int, choices=range(1, 13))
+    summary_parser.add_argument("--year", type=int)
+
+    # Export
+    subparsers.add_parser("export", help="Export to a CSV file")
 
     return parser.parse_args()
 
@@ -57,13 +113,15 @@ def main():
     if args.command == "add":
         handle_add_expense(args)
     elif args.command == "delete":
-        delete_expense(args)
+        handle_delete_expense(args)
     elif args.command == "list":
-        list_expenses(args)
+        handle_list_expenses(args)
     elif args.command == "summary":
-        summary_expenses(args)
+        handle_summary_expenses(args)
     elif args.command == "update":
-        update_expense(args)
+        handle_update_expense(args)
+    elif args.command == "export":
+        export_expenses()
 
 
 if __name__ == "__main__":
