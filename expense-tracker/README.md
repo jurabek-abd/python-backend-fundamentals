@@ -27,7 +27,7 @@ A simple command-line interface (CLI) application to track and manage your perso
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/jurabek-abd/expense-tracker.git
+git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
 cd expense-tracker
 ```
 

@@ -23,7 +23,7 @@ A simple command-line interface (CLI) application to fetch and display GitHub us
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/jurabek-abd/github-activity-cli.git
+git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
 cd github-activity-cli
 ```
 
