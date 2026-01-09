@@ -8,16 +8,16 @@ def index():
     return redirect(url_for("length"))
 
 
-@app.route("/length", methods=["GET", "POST"])
+@app.route("/length")
 def length():
     return render_template("length.html")
 
 
-@app.route("/weight", methods=["GET", "POST"])
+@app.route("/weight")
 def weight():
     return render_template("weight.html")
 
 
-@app.route("/temperature", methods=["GET", "POST"])
+@app.route("/temperature")
 def temperature():
     return render_template("temperature.html")
