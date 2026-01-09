@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unit Converter - Weight</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    </head>
+    <body>
+        <div class="app">
+            <!-- LEFT PANEL -->
+            <form class="panel" method="POST" action="/weight">
+                <h1>Unit Converter</h1>
+
+                <nav class="nav">
+                    <a href="/length">Length</a>
+                    <a href="/weight" class="active">Weight</a>
+                    <a href="/temperature">Temperature</a>
+                </nav>
+
+                <label>Enter the weight to convert</label>
+                <input type="number" name="value" step="any" placeholder="e.g. 100" value="{{ input_value or '' }}" required />
+
+                <label>Unit to convert from</label>
+                <select name="from_unit">
+                    <option value="milligram" {% if from_unit == 'milligram' %}selected{% endif %}>Milligram</option>
+                    <option value="gram" {% if from_unit == 'gram' %}selected{% endif %}>Gram</option>
+                    <option value="kilogram" {% if from_unit == 'kilogram' %}selected{% endif %}>Kilogram</option>
+                    <option value="ounce" {% if from_unit == 'ounce' %}selected{% endif %}>Ounce</option>
+                    <option value="pound" {% if from_unit == 'pound' %}selected{% endif %}>Pound</option>
+                </select>
+
+                <label>Unit to convert to</label>
+                <select name="to_unit">
+                    <option value="milligram" {% if to_unit == 'milligram' %}selected{% endif %}>Milligram</option>
+                    <option value="gram" {% if to_unit == 'gram' %}selected{% endif %}>Gram</option>
+                    <option value="kilogram" {% if to_unit == 'kilogram' %}selected{% endif %}>Kilogram</option>
+                    <option value="ounce" {% if to_unit == 'ounce' %}selected{% endif %}>Ounce</option>
+                    <option value="pound" {% if to_unit == 'pound' %}selected{% endif %}>Pound</option>
+                </select>
+
+                <button type="submit">Convert</button>
+            </form>
+
+            <!-- RIGHT PANEL -->
+            <div class="panel">
+                <div class="result-title">Result of your calculation</div>
+                {% if result is not none %}
+                    <div class="result">{{ input_value }} {{ from_unit }} = {{ result }} {{ to_unit }}</div>
+                {% else %}
+                    <div class="result">Enter values and click Convert</div>
+                {% endif %}
+
+                {% if result is not none %}
+                    <a href="/weight"><button type="button">Reset</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

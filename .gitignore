@@ -1,4 +1,7 @@
 __pycache__/
+.venv/
+venv/
+env/
 
 task-tracker/storage.json
 github-user-activity/cache.json
