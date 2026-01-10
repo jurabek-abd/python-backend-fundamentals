@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} - Personal Blog{% endblock %}
+
+{% block content %}
+<div class="article-detail">
+    <header class="article-header">
+        <h1>{{ article.title }}</h1>
+        <div class="article-meta">
+            <time class="article-date">Published on {{ article.date }}</time>
+        </div>
+    </header>
+
+    <div class="article-content">
+        {{ article.content|safe }}
+    </div>
+
+    <footer class="article-footer">
+        <a href="/" class="btn-secondary">← Back to Home</a>
+    </footer>
+</div>
+{% endblock %}

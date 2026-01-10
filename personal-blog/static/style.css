@@ -1,0 +1,756 @@
+/* ===========================
+   Modern Minimal Black Theme
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-tertiary: #141414;
+    --bg-hover: #1a1a1a;
+    --bg-input: #0f0f0f;
+
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --text-tertiary: #555555;
+
+    --border-primary: #1a1a1a;
+    --border-secondary: #333333;
+    --border-hover: #444444;
+}
+
+body {
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        Arial, sans-serif;
+    line-height: 1.65;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+}
+
+main {
+    flex: 1;
+    padding: 0;
+    margin-top: 60px;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+/* ===========================
+   Navigation
+   =========================== */
+.navbar {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-primary);
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+}
+
+.logo:hover {
+    color: var(--text-secondary);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+/* ===========================
+   Alerts & Flash Messages
+   =========================== */
+.alert {
+    padding: 1.2rem 2rem;
+    border: 1px solid var(--border-secondary);
+    margin-bottom: 3rem;
+    font-weight: 400;
+    font-size: 14px;
+    background-color: var(--bg-secondary);
+}
+
+.alert-success {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+.alert-error {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+.alert-warning {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+}
+
+.alert-info {
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
+}
+
+/* ===========================
+   Hero Section
+   =========================== */
+.hero {
+    text-align: left;
+    padding: 6rem 0 4rem 0;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.hero p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+}
+
+/* ===========================
+   Article Cards (Home Page)
+   =========================== */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 3rem;
+    background-color: var(--border-primary);
+    border: 1px solid var(--border-primary);
+}
+
+.article-card {
+    background: var(--bg-primary);
+    padding: 3rem;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.article-card:hover {
+    background-color: var(--bg-secondary);
+}
+
+.article-card-header {
+    margin-bottom: 1.5rem;
+}
+
+.article-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.article-card h2 a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.article-card h2 a:hover {
+    color: var(--text-secondary);
+}
+
+.article-date {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.article-preview {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.read-more {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+    border-bottom: 1px solid var(--text-primary);
+    padding-bottom: 2px;
+}
+
+.read-more:hover {
+    color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+/* ===========================
+   Article Detail Page
+   =========================== */
+.article-detail {
+    background: var(--bg-primary);
+    padding: 6rem 0;
+    min-width: 700px;
+    max-width: 900px;
+    margin: 0 auto;
+    min-height: 600px;
+}
+
+.article-header {
+    border-bottom: 1px solid var(--border-primary);
+    padding-bottom: 3rem;
+    margin-bottom: 4rem;
+}
+
+.article-header h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.article-meta {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    color: var(--text-tertiary);
+}
+
+.article-date {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+}
+
+.article-footer {
+    margin-top: 6rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+/* ===========================
+   Authentication Pages
+   =========================== */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    padding: 3rem 0;
+}
+
+.auth-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    padding: 4rem;
+    width: 100%;
+    min-width: 700px;
+    max-width: 1200px;
+}
+
+.auth-card h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    font-weight: 400;
+}
+
+.auth-subtitle {
+    text-align: left;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 0.95rem;
+}
+
+.auth-form {
+    margin-top: 3rem;
+}
+
+.auth-footer {
+    text-align: left;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+.auth-footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.auth-footer a:hover {
+    color: var(--text-primary);
+}
+
+/* ===========================
+   Forms
+   =========================== */
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--border-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition:
+        border-color 0.2s,
+        background-color 0.2s;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--border-secondary);
+    background-color: var(--bg-secondary);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 300px;
+    line-height: 1.6;
+}
+
+/* ===========================
+   Dashboard
+   =========================== */
+.dashboard {
+    background: var(--bg-primary);
+    padding: 0;
+    margin-top: 3rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+/* ===========================
+   Tables
+   =========================== */
+.articles-table {
+    overflow-x: auto;
+    border: 1px solid var(--border-primary);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+th {
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+td {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-primary);
+    background-color: var(--bg-primary);
+}
+
+tbody tr {
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: var(--bg-secondary);
+}
+
+tbody tr:hover td {
+    background-color: var(--bg-secondary);
+}
+
+.article-title-col a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.05rem;
+    transition: color 0.2s;
+}
+
+.article-title-col a:hover {
+    color: var(--text-secondary);
+}
+
+.article-date-col {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+}
+
+.article-actions-col {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ===========================
+   Article Form Container
+   =========================== */
+.form-container {
+    background: var(--bg-primary);
+    padding: 0;
+    max-width: 1000px;
+    margin: 3rem auto 0;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.form-header h1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+
+.article-form {
+    margin-top: 2rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-primary);
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+.btn-primary,
+.btn-secondary,
+.btn-edit,
+.btn-delete {
+    padding: 1rem 2rem;
+    border: 1px solid var(--border-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.btn-primary {
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+.btn-secondary {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-hover);
+}
+
+.btn-edit {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.8rem;
+    border-color: var(--border-secondary);
+}
+
+.btn-edit:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-hover);
+}
+
+.btn-delete {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.8rem;
+    border-color: var(--text-primary);
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+}
+
+.btn-delete:hover {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* ===========================
+   Empty State
+   =========================== */
+.empty-state {
+    text-align: center;
+    padding: 8rem 2rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+}
+
+.empty-state h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+.empty-state p {
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.footer {
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-primary);
+    padding: 3rem 0;
+    margin-top: 8rem;
+    text-align: center;
+    color: var(--text-tertiary);
+}
+
+.footer p {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 1200px) {
+    .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    main {
+        margin-top: 60px;
+    }
+
+    .hero {
+        padding: 4rem 0 3rem 0;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 1px;
+    }
+
+    .article-card {
+        padding: 2rem;
+    }
+
+    .article-detail {
+        min-width: 400px;
+        padding: 4rem 0;
+    }
+
+    .article-header h1 {
+        font-size: 2rem;
+    }
+
+    .dashboard-header,
+    .form-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .dashboard-header h1,
+    .form-header h1 {
+        font-size: 2rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .article-actions-col {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn-primary,
+    .form-actions .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .auth-card {
+        min-width: 400px;
+        max-width: 600px;
+        padding: 2.5rem;
+    }
+
+    th,
+    td {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .auth-card {
+        min-width: 350px;
+        max-width: 450px;
+    }
+
+    .article-detail {
+        min-width: unset;
+    }
+
+    .article-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .article-card {
+        padding: 1.5rem;
+    }
+}

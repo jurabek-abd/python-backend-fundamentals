@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Personal Blog{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Admin Login</h1>
+        <p class="auth-subtitle">Sign in to manage your blog</p>
+
+        <form method="POST" action="/login" class="auth-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autofocus placeholder="Enter your username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+
+        <div class="auth-footer">
+            <a href="/">← Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
