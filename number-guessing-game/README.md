@@ -2,7 +2,7 @@
 
 A simple command-line interface (CLI) number guessing game where you try to guess a randomly generated number. Built with Python using only standard library modules.
 
-**Project URL:** https://roadmap.sh/projects/number-guessing-game
+**Project URL:** https://roadmap.sh/projects/number-guessing-game/solutions?u=692db4d2a17ff74763dc81f1
 
 ## Features
 
@@ -195,8 +195,8 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-Built as part of the [roadmap.sh Number Guessing Game project](https://roadmap.sh/projects/number-guessing-game).
+Built as part of the [roadmap.sh Number Guessing Game project](https://roadmap.sh/projects/number-guessing-game/solutions?u=692db4d2a17ff74763dc81f1).
 
 ---
 
-**Project URL:** https://roadmap.sh/projects/number-guessing-game
+**Project URL:** https://roadmap.sh/projects/number-guessing-game/solutions?u=692db4d2a17ff74763dc81f1
