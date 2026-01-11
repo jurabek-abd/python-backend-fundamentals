@@ -2,8 +2,10 @@ __pycache__/
 .venv/
 venv/
 env/
+.env
 
 task-tracker/storage.json
 github-user-activity/cache.json
 expense-tracker/expenses.json
 number-guessing-game/sessions.json
+personal-blog/articles/*.md
