@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_wtf.csrf import CSRFProtect
+from flask_wtf.form import FlaskForm
 from utils.article_manager import (
     ArticleForm,
     delete_article_by_id,
@@ -33,9 +34,9 @@ def index():
 def article(id):
     result = get_article_by_id(id)
     if not result["success"]:
-        flash(result["error"])
+        flash(result["error"], "error")
         return redirect("/")
-    return render_template("article.html", article=article)
+    return render_template("article.html", article=result["article"])
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -47,12 +48,12 @@ def login():
         is_valid = validate_credentials(username, password)
 
         if not is_valid["success"]:
-            flash(str(is_valid["error"]))
+            flash(str(is_valid["error"]), "error")
         else:
             create_sessions(username)
             return redirect("/dashboard")
 
-    return render_template("login.html")
+    return render_template("login.html", form=FlaskForm())
 
 
 @app.route("/dashboard")
@@ -61,15 +62,15 @@ def dashboard():
     return render_template("dashboard.html", articles=list_all_articles())
 
 
-@app.route("/delete-article/<id>", methods=["GET", "POST"])
+@app.route("/delete-article/<id>", methods=["POST"])
 @auth
+@csrf.exempt
 def delete_article(id):
-    if request.method == "POST":
-        result = delete_article_by_id(id)
-        if not result["success"]:
-            flash(str(result["error"]))
-        else:
-            flash("Article deleted")
+    result = delete_article_by_id(id)
+    if not result["success"]:
+        flash(str(result["error"]), "error")
+    else:
+        flash("Article deleted")
     return redirect("/dashboard")
 
 
@@ -83,9 +84,15 @@ def edit_article(id):
         if result["success"]:
             return redirect("/dashboard")
 
-    article = get_article_by_id(id)
+    result = get_article_by_id(id)
 
-    return render_template("edit_article.html", article={"id": id, **article})
+    if not result["success"]:
+        flash(result["error"], "error")
+        return redirect(f"/edit-article/{id}")
+
+    return render_template(
+        "edit_article.html", article={"id": id, **result["article"]}, form=form
+    )
 
 
 @app.route("/add-article", methods=["GET", "POST"])
@@ -98,7 +105,7 @@ def add_article():
         if result["success"]:
             return redirect("/dashboard")
 
-    return render_template("add_article.html")
+    return render_template("add_article.html", form=form)
 
 
 @app.route("/logout")

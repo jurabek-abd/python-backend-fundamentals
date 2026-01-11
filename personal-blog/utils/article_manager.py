@@ -5,8 +5,9 @@ from typing import cast
 from uuid import uuid4
 
 import frontmatter
-from wtforms import DateField, Form, StringField
-from wtforms.validators import input_required, length, regexp
+from flask_wtf import FlaskForm
+from wtforms import StringField, TextAreaField
+from wtforms.validators import DataRequired, Length
 
 PROJECT_ROOT = Path(__file__).parent.parent
 ARTICLES_DIR = PROJECT_ROOT / "articles"
@@ -14,22 +15,20 @@ ARTICLES_DIR = PROJECT_ROOT / "articles"
 ARTICLES_DIR.mkdir(exist_ok=True)
 
 
-class ArticleForm(Form):
+class ArticleForm(FlaskForm):
     title = StringField(
         "Article Title",
         validators=[
-            input_required(),
-            length(min=40, max=80),
-            regexp("^[^a-zA-Z0-9-]+$"),
+            DataRequired(),
+            Length(min=4, max=200),
         ],
     )
-    date = DateField("Article Date", validators=[input_required()])
-    content = StringField(
+    date = StringField("Article Date", validators=[DataRequired()])
+    content = TextAreaField(
         "Article Content",
         validators=[
-            input_required(),
-            length(min=500, max=3000),
-            regexp("^[^a-zA-Z0-9-]+$"),
+            DataRequired(),
+            Length(min=30, max=50000),
         ],
     )
 
@@ -47,15 +46,15 @@ def delete_article_by_id(article_id):
 def list_all_articles():
     articles = []
 
-    files = ARTICLES_DIR.iterdir()
+    files = list(ARTICLES_DIR.iterdir())
 
-    if not ARTICLES_DIR:
+    if not files:
         return []
 
     for file in files:
         if file.suffix == ".md":
             article_id = file.stem
-            with open(file, "r") as f:
+            with open(file, "r", encoding="utf-8") as f:
                 metadata, content = frontmatter.parse(f.read())
 
                 article = {
@@ -77,7 +76,7 @@ def get_article_by_id(article_id):
     if not os.path.exists(article_file):
         return {"success": False, "error": "404 - Not found"}
 
-    with open(article_file, "r") as f:
+    with open(article_file, "r", encoding="utf-8") as f:
         metadata, content = frontmatter.parse(f.read())
 
     article = {"title": metadata["title"], "date": metadata["date"], "content": content}
