@@ -1,13 +1,15 @@
 import os
-from functools import wraps
 from pathlib import Path
 
-# from time import time
-# from typing import cast
-# from uuid import uuid4
-import frontmatter
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, session
+from utils.article_manager import (
+    delete_article_by_id,
+    get_article_by_id,
+    list_all_articles,
+    save_article,
+)
+from utils.auth import auth, valid_credentials
 
 load_dotenv()
 
@@ -15,33 +17,6 @@ PROJECT_ROOT = Path(__file__).parent
 ARTICLES_DIR = PROJECT_ROOT / "articles"
 
 ARTICLES_DIR.mkdir(exist_ok=True)
-
-
-def list_all_articles():
-    articles = []
-
-    files = ARTICLES_DIR.iterdir()
-
-    if not files:
-        return []
-
-    for file in files:
-        if file.suffix == ".md":
-            article_id = file.stem
-            with open(file, "r") as f:
-                metadata, content = frontmatter.parse(f.read())
-
-                article = {
-                    "id": article_id,
-                    "content": content,
-                    "title": metadata["title"],
-                    "date": metadata["date"],
-                }
-
-                articles.append(article)
-
-    articles.sort(key=lambda x: x["date"], reverse=True)
-    return articles
 
 
 app = Flask(__name__)
@@ -58,21 +33,7 @@ def index():
 
 @app.route("/article/<id>")
 def article(id):
-    article_file = ARTICLES_DIR / f"{id}.md"
-
-    if not os.path.exists(article_file):
-        article = {
-            "title": "404 Error - Article Not Found",
-            "date": "N/A",
-            "content": "N/A",
-        }
-        return render_template("article.html", article=article)
-
-    with open(article_file, "r") as f:
-        metadata, content = frontmatter.parse(f.read())
-
-    article = {"title": metadata["title"], "date": metadata["date"], "content": content}
-
+    article = get_article_by_id(id)
     return render_template("article.html", article=article)
 
 
@@ -82,25 +43,14 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if username == "admin" and password == os.getenv("PASSWORD"):
-            session["username"] = username
-            session["logged_in"] = True
+        is_valid = valid_credentials(username, password)
 
+        if is_valid["success"]:
             return redirect("/dashboard")
         else:
-            flash("Invalid credentials", "error")
+            flash(f"{is_valid['error']}", "error")
 
     return render_template("login.html")
-
-
-def auth(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        if not session.get("logged_in", False):
-            return redirect("/login")
-        return func(*args, **kwargs)
-
-    return wrapper
 
 
 @app.route("/dashboard")
@@ -113,9 +63,44 @@ def dashboard():
 @auth
 def delete_article(id):
     if request.method == "POST":
-        article_file = ARTICLES_DIR / f"{id}.md"
-
-        if os.path.exists(article_file):
-            os.remove(article_file)
-            return redirect("/dashboard")
+        delete_article_by_id(id)
     return redirect("/dashboard")
+
+
+@app.route("/edit-article/<id>", methods=["GET", "POST"])
+@auth
+def edit_article(id):
+    if request.method == "POST":
+        result = save_article(
+            request.form["title"], request.form["date"], request.form["content"], id
+        )
+
+        if result["success"]:
+            return redirect("/dashboard")
+
+    article = get_article_by_id(id)
+
+    return render_template("edit_article.html", article={"id": id, **article})
+
+
+@app.route("/add-article", methods=["GET", "POST"])
+@auth
+def add_article():
+    if request.method == "POST":
+        result = save_article(
+            request.form["title"], request.form["date"], request.form["content"]
+        )
+
+        if result["success"]:
+            return redirect("/dashboard")
+
+    return render_template("add_article.html")
+
+
+@app.route("/logout")
+@auth
+def logout():
+    session["username"] = None
+    session["logged_in"] = False
+
+    return redirect("/")
