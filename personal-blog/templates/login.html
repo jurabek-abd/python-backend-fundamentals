@@ -9,6 +9,7 @@
         <p class="auth-subtitle">Sign in to manage your blog</p>
 
         <form method="POST" action="/login" class="auth-form">
+            {{ form.csrf_token }}
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required autofocus placeholder="Enter your username">

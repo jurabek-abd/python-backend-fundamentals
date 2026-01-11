@@ -1,3 +1,4 @@
 Flask
 python-frontmatter
 python-dotenv
+Flask-WTF

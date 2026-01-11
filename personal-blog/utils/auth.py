@@ -4,14 +4,19 @@ from functools import wraps
 from flask import redirect, session
 
 
-def valid_credentials(username, password):
-    if username == "admin" and password == os.getenv("PASSWORD"):
-        session["username"] = username
-        session["logged_in"] = True
+def validate_credentials(username, password):
+    if not username == "admin":
+        return {"success": False, "error": "Invalid username"}
 
-        return {"success": True}
-    else:
-        return {"success": False, "error": "Invalid credentials"}
+    if not password == os.getenv("PASSWORD"):
+        return {"success": False, "error": "Invalid password"}
+
+    return {"success": True}
+
+
+def create_sessions(username):
+    session["username"] = username
+    session["logged_in"] = True
 
 
 def auth(func):

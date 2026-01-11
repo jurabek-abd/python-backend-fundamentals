@@ -5,6 +5,8 @@ from typing import cast
 from uuid import uuid4
 
 import frontmatter
+from wtforms import DateField, Form, StringField
+from wtforms.validators import input_required, length, regexp
 
 PROJECT_ROOT = Path(__file__).parent.parent
 ARTICLES_DIR = PROJECT_ROOT / "articles"
@@ -12,11 +14,31 @@ ARTICLES_DIR = PROJECT_ROOT / "articles"
 ARTICLES_DIR.mkdir(exist_ok=True)
 
 
+class ArticleForm(Form):
+    title = StringField(
+        "Article Title",
+        validators=[
+            input_required(),
+            length(min=40, max=80),
+            regexp("^[^a-zA-Z0-9-]+$"),
+        ],
+    )
+    date = DateField("Article Date", validators=[input_required()])
+    content = StringField(
+        "Article Content",
+        validators=[
+            input_required(),
+            length(min=500, max=3000),
+            regexp("^[^a-zA-Z0-9-]+$"),
+        ],
+    )
+
+
 def delete_article_by_id(article_id):
     article_file = ARTICLES_DIR / f"{article_id}.md"
 
     if not os.path.exists(article_file):
-        return {"success": False}
+        return {"success": False, "error": "Article not found - 404"}
 
     os.remove(article_file)
     return {"success": True}
@@ -27,7 +49,7 @@ def list_all_articles():
 
     files = ARTICLES_DIR.iterdir()
 
-    if not files:
+    if not ARTICLES_DIR:
         return []
 
     for file in files:
@@ -53,19 +75,14 @@ def get_article_by_id(article_id):
     article_file = ARTICLES_DIR / f"{article_id}.md"
 
     if not os.path.exists(article_file):
-        article = {
-            "title": "404 Error - Article Not Found",
-            "date": "N/A",
-            "content": "N/A",
-        }
-        return article
+        return {"success": False, "error": "404 - Not found"}
 
     with open(article_file, "r") as f:
         metadata, content = frontmatter.parse(f.read())
 
     article = {"title": metadata["title"], "date": metadata["date"], "content": content}
 
-    return article
+    return {"success": True, "article": article}
 
 
 def save_article(title, date, content, article_id=None):
