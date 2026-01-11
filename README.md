@@ -70,6 +70,7 @@ That’s intentional.
 - [Expense Tracker](https://roadmap.sh/projects/expense-tracker/solutions?u=692db4d2a17ff74763dc81f1)
 - [Number Guessing Game](https://roadmap.sh/projects/number-guessing-game/solutions?u=692db4d2a17ff74763dc81f1)
 - [Unit Converter](https://roadmap.sh/projects/unit-converter)
+- [Personal Blog](https://roadmap.sh/projects/personal-blog)
 
 ---
 
