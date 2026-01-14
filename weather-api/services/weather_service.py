@@ -30,23 +30,23 @@ def _make_weather_request(url_path):
 
     r = requests.get(url_path, params=payload)
 
-    return {"status": r.status_code, "data": r.json()}
+    match r.status_code:
+        case 200:
+            return r.json()
+        case 404:
+            raise InvalidLocationError("Location not found")
+        case 401:
+            raise InvalidAPIKeyError("Invalid API key")
+        case 429:
+            raise RateLimitError("Too many requests, please try again later")
+        case 500:
+            raise ExternalAPIError(f"Weather service is down (status: {r.status_code})")
+        case _:
+            raise WeatherAPIError(f"Unexpected error: {r.status_code}")
 
 
 def get_weather(location, start_date=None, end_date=None):
     url_path = _build_url_path(location, start_date, end_date)
     response = _make_weather_request(url_path)
-    status = response["status"]
 
-    if status == 200:
-        return response["data"]
-    elif status == 404:
-        raise InvalidLocationError(f"Location '{location}' not found")
-    elif status == 401:
-        raise InvalidAPIKeyError("Invalid API key")
-    elif status == 429:
-        raise RateLimitError("Too many requests, please try again later")
-    elif status >= 500:
-        raise ExternalAPIError(f"Weather service is down (status: {status})")
-    else:
-        raise WeatherAPIError(f"Unexpected error: {status}")
+    return response
