@@ -2,7 +2,7 @@
 
 A simple web application to convert between different units of measurement. Built with Python Flask using a clean server-side rendering approach.
 
-**Project URL:** https://roadmap.sh/projects/unit-converter
+**Project URL:** https://roadmap.sh/projects/unit-converter/solutions?u=692db4d2a17ff74763dc81f1
 
 ## Features
 
@@ -210,8 +210,8 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-Built as part of the [roadmap.sh Unit Converter project](https://roadmap.sh/projects/unit-converter).
+Built as part of the [roadmap.sh Unit Converter project](https://roadmap.sh/projects/unit-converter/solutions?u=692db4d2a17ff74763dc81f1).
 
 ---
 
-**Project URL:** https://roadmap.sh/projects/unit-converter
+**Project URL:** https://roadmap.sh/projects/unit-converter/solutions?u=692db4d2a17ff74763dc81f1

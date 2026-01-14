@@ -2,7 +2,7 @@
 
 A simple personal blog application where you can write and publish articles. Built with Python Flask using server-side rendering and filesystem-based storage.
 
-**Project URL:** https://roadmap.sh/projects/personal-blog
+**Project URL:** https://roadmap.sh/projects/personal-blog/solutions?u=692db4d2a17ff74763dc81f1
 
 ## Features
 
@@ -245,8 +245,8 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-Built as part of the [roadmap.sh Personal Blog project](https://roadmap.sh/projects/personal-blog).
+Built as part of the [roadmap.sh Personal Blog project](https://roadmap.sh/projects/personal-blog/solutions?u=692db4d2a17ff74763dc81f1).
 
 ---
 
-**Project URL:** https://roadmap.sh/projects/personal-blog
+**Project URL:** https://roadmap.sh/projects/personal-blog/solutions?u=692db4d2a17ff74763dc81f1
