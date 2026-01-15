@@ -1,6 +1,7 @@
 import os
 
 import requests
+from config import get_base_url, get_secret_key
 from dotenv import load_dotenv
 from utils.error_handler import (
     ExternalAPIError,
@@ -12,8 +13,8 @@ from utils.error_handler import (
 
 load_dotenv()
 
-BASE_URL = os.getenv("API_BASE_URL")
-SECRET_KEY = os.getenv("API_SECRET_KEY")
+BASE_URL = get_base_url()
+SECRET_KEY = get_secret_key()
 
 
 def _build_url_path(location, start_date=None, end_date=None):

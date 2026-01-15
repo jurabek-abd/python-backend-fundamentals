@@ -1,14 +1,14 @@
 import json
-import os
 
 import redis
-from dotenv import load_dotenv
+import redis.exceptions
+from config import get_redis_host, get_redis_port
 
-load_dotenv()
+DEFAULT_CACHE_EXPIRATION_SECONDS = 43200
 
 r = redis.Redis(
-    host=os.getenv("REDIS_HOST", "localhost"),
-    port=int(os.getenv("REDIS_PORT", 6379)),
+    host=get_redis_host(),
+    port=get_redis_port(),
     decode_responses=True,
 )
 
@@ -16,18 +16,26 @@ r = redis.Redis(
 def get_cached_weather(cache_key):
     """Get weather from cache, returns None if not found"""
 
-    cached = r.get(cache_key)
+    try:
+        cached = r.get(cache_key)
 
-    if cached is None:
+        if cached is None:
+            return None
+
+        return json.loads(cached)
+    except redis.exceptions.ConnectionError:
         return None
 
-    return json.loads(cached)
 
-
-def set_cached_weather(cache_key, data, expiration=43200):  # 12 hours default
+def set_cached_weather(
+    cache_key, data, expiration=DEFAULT_CACHE_EXPIRATION_SECONDS
+):  # 12 hours default
     """Store weather in cache with expiration"""
 
-    r.set(cache_key, json.dumps(data), ex=expiration)
+    try:
+        r.set(cache_key, json.dumps(data), ex=expiration)
+    except redis.exceptions.ConnectionError:
+        return None
 
 
 def get_cache_key(location, start_date=None, end_date=None):

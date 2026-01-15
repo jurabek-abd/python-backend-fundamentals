@@ -1,6 +1,12 @@
 class WeatherAPIError(Exception):
     """Base exception for all weather API errors"""
 
+    def __init__(self, message="An error occured"):
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
     pass
 
 
@@ -54,4 +60,4 @@ def register_error_handlers(app):
 
     @app.errorhandler(WeatherAPIError)
     def handle_general_weather_error(e):
-        return {"error": "An error occurred"}, 500
+        return {"error": str(e)}, 500

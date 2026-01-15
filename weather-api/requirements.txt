@@ -3,3 +3,4 @@ requests
 redis
 python-dotenv
 Flask-Limiter
+geopy

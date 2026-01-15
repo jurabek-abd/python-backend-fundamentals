@@ -13,3 +13,6 @@ limiter = Limiter(
     default_limits=["20 per day", "5 per hour"],
     storage_uri="redis://localhost:6379",
 )
+
+if __name__ == "__main__":
+    app.run()
