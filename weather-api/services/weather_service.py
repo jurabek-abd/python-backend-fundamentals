@@ -1,5 +1,3 @@
-import os
-
 import requests
 from config import get_base_url, get_secret_key
 from dotenv import load_dotenv
