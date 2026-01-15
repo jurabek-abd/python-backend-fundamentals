@@ -26,7 +26,7 @@ A simple web application to convert between different units of measurement. Buil
 1. Clone the repository:
 ```bash
 git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
-cd unit-converter
+cd python-backend-fundamentals\unit-converter
 ```
 
 2. Create and activate a virtual environment:

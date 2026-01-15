@@ -25,7 +25,7 @@ A simple command-line interface (CLI) application to track and manage your tasks
 1. Clone the repository:
 ```bash
 git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
-cd task-tracker
+cd python-backend-fundamentals\task-tracker
 ```
 
 2. The project is ready to use! No additional installation required.

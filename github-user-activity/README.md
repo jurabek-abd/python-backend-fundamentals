@@ -24,7 +24,7 @@ A simple command-line interface (CLI) application to fetch and display GitHub us
 1. Clone the repository:
 ```bash
 git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
-cd github-activity-cli
+cd python-backend-fundamentals\github-activity-cli
 ```
 
 2. The project is ready to use! No additional installation required.

@@ -25,7 +25,7 @@ A simple command-line interface (CLI) number guessing game where you try to gues
 1. Clone the repository:
 ```bash
 git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
-cd number-guessing-game
+cd python-backend-fundamentals\number-guessing-game
 ```
 
 2. The project is ready to use! No additional installation required.

@@ -29,7 +29,7 @@ A simple personal blog application where you can write and publish articles. Bui
 1. Clone the repository:
 ```bash
 git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
-cd personal-blog
+cd python-backend-fundamentals\personal-blog
 ```
 
 2. Create and activate a virtual environment:

@@ -28,7 +28,7 @@ A simple command-line interface (CLI) application to track and manage your perso
 1. Clone the repository:
 ```bash
 git clone https://github.com/jurabek-abd/python-backend-fundamentals.git
-cd expense-tracker
+cd python-backend-fundamentals\expense-tracker
 ```
 
 2. The project is ready to use! No additional installation required.

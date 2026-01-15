@@ -23,9 +23,6 @@ def get_weather_route(location):
     if end_date is not None and not is_valid_date_format(end_date):
         raise WeatherAPIError
 
-    if not is_valid_location_string(location):
-        raise InvalidLocationError(location)
-
     cache_key = get_cache_key(location, start_date, end_date)
 
     cached_weather = get_cached_weather(cache_key)
@@ -34,6 +31,9 @@ def get_weather_route(location):
         return {
             "data": cached_weather,
         }
+
+    if not is_valid_location_string(location):
+        raise InvalidLocationError(location)
 
     data = get_weather(location, start_date, end_date)
 
