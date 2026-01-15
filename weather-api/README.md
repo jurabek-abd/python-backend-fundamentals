@@ -2,7 +2,7 @@
 
 A RESTful weather API that fetches data from Visual Crossing's API with Redis caching, rate limiting, and comprehensive error handling. Built with Python Flask.
 
-**Project URL:** https://roadmap.sh/projects/weather-api-wrapper-service
+**Project URL:** https://roadmap.sh/projects/weather-api-wrapper-service/solutions?u=692db4d2a17ff74763dc81f1
 
 ## Features
 
@@ -331,7 +331,7 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-Built as part of the [roadmap.sh Weather API project](https://roadmap.sh/projects/weather-api-wrapper-service).
+Built as part of the [roadmap.sh Weather API project](https://roadmap.sh/projects/weather-api-wrapper-service/solutions?u=692db4d2a17ff74763dc81f1).
 
 - **Visual Crossing Weather API**: https://www.visualcrossing.com/weather-api
 - **Redis**: https://redis.io/
@@ -339,4 +339,4 @@ Built as part of the [roadmap.sh Weather API project](https://roadmap.sh/project
 
 ---
 
-**Project URL:** https://roadmap.sh/projects/weather-api-wrapper-service
+**Project URL:** https://roadmap.sh/projects/weather-api-wrapper-service/solutions?u=692db4d2a17ff74763dc81f1

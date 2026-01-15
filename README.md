@@ -71,7 +71,7 @@ That’s intentional.
 - [Number Guessing Game](https://roadmap.sh/projects/number-guessing-game/solutions?u=692db4d2a17ff74763dc81f1)
 - [Unit Converter](https://roadmap.sh/projects/unit-converter/solutions?u=692db4d2a17ff74763dc81f1)
 - [Personal Blog](https://roadmap.sh/projects/personal-blog/solutions?u=692db4d2a17ff74763dc81f1)
-- [Weather API](https://roadmap.sh/projects/weather-api-wrapper-service)
+- [Weather API](https://roadmap.sh/projects/weather-api-wrapper-service/solutions?u=692db4d2a17ff74763dc81f1)
 
 ---
 
