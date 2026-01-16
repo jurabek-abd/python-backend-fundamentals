@@ -21,12 +21,14 @@ def get_cached_movies(cache_key):
     """Get movies from cache, return None if not found"""
 
     try:
-        if cached is None:
-            print("\n# Cache is N/A. Will fetch new data")
+        cached_movies = r.get(cache_key)
+
+        if cached_movies is None:
+            print("\n# Cache doesn't exist. Will fetch new data")
             return None
 
         print("\n# Got cached data")
-        return json.loads(cached)
+        return json.loads(cached_movies)
     except redis.exceptions.ConnectionError:
         print("\n# Failed to get cached movies. Redis is down")
         return None
