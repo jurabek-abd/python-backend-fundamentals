@@ -14,7 +14,7 @@ r = redis.Redis(
 
 
 def get_cached_weather(cache_key):
-    """Get weather from cache, returns None if not found"""
+    """Get weather from cache, return None if not found"""
 
     try:
         cached = r.get(cache_key)
