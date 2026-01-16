@@ -2,7 +2,7 @@
 
 A command-line interface tool to fetch and display movie information from The Movie Database (TMDB) API with Redis caching support.
 
-**Project URL:** https://roadmap.sh/projects/tmdb-cli
+**Project URL:** https://roadmap.sh/projects/tmdb-cli/solutions?u=692db4d2a17ff74763dc81f1
 
 ## Features
 
@@ -286,7 +286,7 @@ This project is open source and available for educational purposes.
 
 ## Acknowledgments
 
-Built as part of the [roadmap.sh TMDB CLI project](https://roadmap.sh/projects/tmdb-cli).
+Built as part of the [roadmap.sh TMDB CLI project](https://roadmap.sh/projects/tmdb-cli/solutions?u=692db4d2a17ff74763dc81f1).
 
 - **The Movie Database (TMDB)**: https://www.themoviedb.org/
 - **Redis**: https://redis.io/
@@ -294,4 +294,4 @@ Built as part of the [roadmap.sh TMDB CLI project](https://roadmap.sh/projects/t
 
 ---
 
-**Project URL:** https://roadmap.sh/projects/tmdb-cli
+**Project URL:** https://roadmap.sh/projects/tmdb-cli/solutions?u=692db4d2a17ff74763dc81f1
