@@ -8,7 +8,7 @@ def create_parser():
         "--type",
         type=str,
         required=True,
-        choices=["playing", "popular", "top", "upcoming"],
+        choices=["now_playing", "popular", "top_rated", "upcoming"],
         help="Movie List Type",
     )
     parser.add_argument(

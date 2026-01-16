@@ -3,10 +3,8 @@ from textwrap import shorten
 from rich.console import Console
 from rich.table import Table
 
-movies_per_page = 20
 
-
-def print_movies(data, page=1):
+def display_movies_table(data, page=1):
     console = Console()
 
     table = Table(title="\n🎬 Movies", show_lines=True)
@@ -17,6 +15,7 @@ def print_movies(data, page=1):
     table.add_column("Popularity", justify="right", width=10)
     table.add_column("Overview")
 
+    movies_per_page = 20
     start = (movies_per_page * (page - 1)) + 1
 
     for i, movie in enumerate(data.get("results", []), start=start):
