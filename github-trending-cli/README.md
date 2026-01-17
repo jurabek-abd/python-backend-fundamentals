@@ -185,18 +185,6 @@ The tool queries GitHub's search API for repositories:
 - If you hit the limit, wait an hour or authenticate with a personal access token
 - Consider adding authentication in `config.py` for higher limits (5,000 requests/hour)
 
-## Future Enhancements
-
-Potential improvements for learning:
-- Add language filtering (`--language python`)
-- Support for topic/tag filtering
-- Option to sort by forks or recent activity instead of stars
-- Export results to CSV or JSON format
-- Add pagination to browse more results
-- Implement caching to reduce API calls
-- Show repository stats (forks, watchers, issues)
-- Add interactive mode to open repos in browser
-
 ## Development
 
 ### Running the Tool
