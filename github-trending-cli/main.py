@@ -1,8 +1,15 @@
 import argparse
 
-from api_client import get_public_repos
-from config import DEFAULT_DURATION, DEFAULT_LIMIT
-from formatter import format_repos
+from api_client import fetch_repos
+from config import (
+    DATE_RANGES,
+    DEFAULT_DURATION,
+    DEFAULT_LIMIT,
+    DURATION_OPTIONS,
+    MAX_LIMIT,
+    MIN_LIMIT,
+)
+from formatter import output_repos
 
 
 def create_parser():
@@ -11,7 +18,7 @@ def create_parser():
     parser.add_argument(
         "--duration",
         type=str,
-        choices=["day", "week", "month", "year"],
+        choices=DURATION_OPTIONS,
         default=DEFAULT_DURATION,
         help="Specifies the time i.e. `day`, `week`, `month`, `year`). Default to `week`.",
     )
@@ -31,27 +38,37 @@ def main():
 
     limit = args.limit
 
-    if limit < 1:
+    if limit < MIN_LIMIT:
         limit = DEFAULT_LIMIT
 
-        print("\n# Limit can't be below 1. It will be set to 10 to avoid crashing")
-        return
-    elif limit > 100:
+        print(
+            f"\n# Limit can't be below {MIN_LIMIT}. It will be set to {DEFAULT_LIMIT} to avoid crashing"
+        )
+    elif limit > MAX_LIMIT:
         limit = DEFAULT_LIMIT
 
-        print("\n# Limit can't be aboce 100. It will be set to 10 to avoid crashing")
+        print(
+            f"\n# Limit can't be above {MAX_LIMIT}. It will be set to {DEFAULT_LIMIT} to avoid crashing"
+        )
+
+    status, response = fetch_repos(DATE_RANGES[args.duration](), limit)
+
+    if not status == 200:
+        print(f"\n# {response['message']}")
+        print("\n# See all the errors below:\n")
+
+        for error in response.get("errors"):
+            print(f"# {error['message']}")
+
         return
 
-    repos = get_public_repos(args.duration, args.limit)
-
-    if repos is None:
-        print("\n# Could not fetch repos. Try again")
+    if response is None:
         return
-    elif len(repos) == 0:
-        print("\n No repos found")
+    elif len(response.get("items")) == 0:
+        print("\n# No repos found")
         return
 
-    format_repos(repos)
+    output_repos(response)
 
 
 if __name__ == "__main__":

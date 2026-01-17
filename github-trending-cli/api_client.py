@@ -1,19 +1,27 @@
 import requests
-from config import BASE_URL, GITHUB_HEADERS
+from config import BASE_URL, GITHUB_HEADERS, GITHUB_TIMEOUT_SECONDS
 
 
-def get_public_repos(duration="week", limit=10):
-    response = requests.get(BASE_URL, headers=GITHUB_HEADERS)
+def fetch_repos(date_range, limit=10):
+    params = {
+        "q": f"pushed:{date_range}",
+        "sort": "stars",
+        "order": "desc",
+        "per_page": limit,
+    }
 
-    if response.status_code == 200:
-        return response.json()
-    elif response.status_code == 304:
-        print(f"\n# Error: Not modified (status {response.status_code})")
-    elif response.status_code == 422:
-        print(
-            f"\n# Error: Validation failed, or the endpoint has been spammed (status {response.status_code})"
+    try:
+        response = requests.get(
+            BASE_URL,
+            headers=GITHUB_HEADERS,
+            params=params,
+            timeout=GITHUB_TIMEOUT_SECONDS,
         )
-    else:
-        print(f"\n Error: Something went wrong (status {response.status_code}")
 
-    return None
+        return response.status_code, response.json()
+    except requests.exceptions.ConnectTimeout:
+        print("\n# Failed to fetch github repos. Ran out of time. Try Again")
+    except requests.exceptions.ConnectionError:
+        print(
+            "\n# Failed to connect to the GitHub API. Chech your network connection and try again"
+        )

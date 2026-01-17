@@ -73,6 +73,7 @@ That’s intentional.
 - [Personal Blog](https://roadmap.sh/projects/personal-blog/solutions?u=692db4d2a17ff74763dc81f1)
 - [Weather API](https://roadmap.sh/projects/weather-api-wrapper-service/solutions?u=692db4d2a17ff74763dc81f1)
 - [TMDB CLI Tool](https://roadmap.sh/projects/tmdb-cli/solutions?u=692db4d2a17ff74763dc81f1)
+- [GitHub Trending CLI](https://roadmap.sh/projects/github-trending-cli)
 
 ---
 
