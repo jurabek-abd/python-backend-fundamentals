@@ -74,7 +74,7 @@ That’s intentional.
 - [Weather API](https://roadmap.sh/projects/weather-api-wrapper-service/solutions?u=692db4d2a17ff74763dc81f1)
 - [TMDB CLI Tool](https://roadmap.sh/projects/tmdb-cli/solutions?u=692db4d2a17ff74763dc81f1)
 - [GitHub Trending CLI](https://roadmap.sh/projects/github-trending-cli/solutions?u=692db4d2a17ff74763dc81f1)
-- [Job Listings Scraper](https://roadmap.sh/projects/job-listings-scraper)
+- [Job Listings Scraper](https://roadmap.sh/projects/job-listings-scraper/solutions?u=692db4d2a17ff74763dc81f1)
 
 ---
 
