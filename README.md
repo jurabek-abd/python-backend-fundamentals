@@ -75,6 +75,7 @@ That’s intentional.
 - [TMDB CLI Tool](https://roadmap.sh/projects/tmdb-cli/solutions?u=692db4d2a17ff74763dc81f1)
 - [GitHub Trending CLI](https://roadmap.sh/projects/github-trending-cli/solutions?u=692db4d2a17ff74763dc81f1)
 - [Job Listings Scraper](https://roadmap.sh/projects/job-listings-scraper/solutions?u=692db4d2a17ff74763dc81f1)
+- [Blogging Platform API](https://roadmap.sh/projects/blogging-platform-api)
 
 ---
 
