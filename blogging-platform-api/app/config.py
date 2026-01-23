@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     app_version: str = "0.1.0"
     app_description: str = "Blogging Platform API built with FastAPI"
     debug: bool = True
-    database_url: str = "sqlite:///./data/blog.db"
+    database_url: str = ""
 
     class Config:
         env_file = ".env"

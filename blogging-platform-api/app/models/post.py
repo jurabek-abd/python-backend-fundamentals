@@ -36,7 +36,7 @@ class Post(Base):
                 raise ValueError("All tags must be strings")
             if len(tag) > 50:
                 raise ValueError(f"Tag '{tag}' exceeds 50 characters")
-            if len(tag) < 3:
-                raise ValueError(f"Tag '{tag}' must be at least 3 characters")
+            if len(tag) < 2:
+                raise ValueError(f"Tag '{tag}' must be at least 2 characters")
 
         return value

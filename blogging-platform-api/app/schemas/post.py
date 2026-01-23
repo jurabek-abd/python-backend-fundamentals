@@ -26,3 +26,6 @@ class PostOut(BaseModel):
     tags: Optional[list[str]] = []
     created_at: datetime
     updated_at: datetime | None
+
+    class Config:
+        from_attributes = True

@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from models.post import Post
 from schemas.post import PostCreate, PostOut, PostUpdate
 from sqlalchemy import or_
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 router = APIRouter()
@@ -11,6 +12,12 @@ router = APIRouter()
 @router.get("/", response_model=list[PostOut])
 async def get_posts(term: str = "", db: Session = Depends(get_db)):
     """Get posts. Optional filtering by term."""
+
+    if len(term) > 100:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Searching term can't be greater than 100.",
+        )
 
     posts = (
         db.query(Post)
@@ -54,7 +61,7 @@ async def get_post_by_id(post_id: str, db: Session = Depends(get_db)):
     return post
 
 
-@router.put("/{post_id}", response_model=PostOut)
+@router.patch("/{post_id}", response_model=PostOut)
 async def update_post_by_id(
     post_id: str, payload: PostUpdate, db: Session = Depends(get_db)
 ):
@@ -79,7 +86,14 @@ async def update_post_by_id(
 
         db.commit()
         return post
-    except Exception:
+    except HTTPException:
+        raise
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid data provided"
+        )
+    except SQLAlchemyError:
         db.rollback()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -100,4 +114,3 @@ async def delete_post_by_id(post_id: str, db: Session = Depends(get_db)):
 
     db.delete(post)
     db.commit()
-    return
