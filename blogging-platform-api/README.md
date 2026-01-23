@@ -2,7 +2,7 @@
 
 A RESTful API for a personal blogging platform with full CRUD operations, search functionality, and proper validation. Built with FastAPI, SQLAlchemy, and PostgreSQL.
 
-**Project URL:** https://roadmap.sh/projects/blogging-platform-api
+**Project URL:** https://github.com/jurabek-abd/python-backend-fundamentals.git
 
 ## Features
 
