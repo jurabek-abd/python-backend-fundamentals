@@ -11,7 +11,7 @@ class Post(Base):
     __tablename__ = "posts"
 
     id: Mapped[str] = mapped_column(
-        String(30), primary_key=True, default=lambda: str(uuid.uuid4()), index=True
+        String(36), primary_key=True, default=lambda: str(uuid.uuid4()), index=True
     )
     title: Mapped[str] = mapped_column(String(255))
     content: Mapped[str] = mapped_column(Text)
